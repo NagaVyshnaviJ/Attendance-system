@@ -4,8 +4,11 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['employee', 'manager'], default: 'employee' }, // [cite: 39]
-  employeeId: { type: String, unique: true }, // [cite: 40]
+  role: { type: String, enum: ['employee', 'manager'], default: 'employee' },
+  
+  // FIX: Add "sparse: true" so multiple users can have null/empty IDs
+  employeeId: { type: String, unique: true, sparse: true }, 
+  
   department: { type: String },
 }, { timestamps: true });
 
